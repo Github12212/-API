@@ -1,0 +1,305 @@
+{
+	"info": {
+		"_postman_id": "8578440a-fcad-4857-bdf4-5170b2412395",
+		"name": "天气API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "tianqi",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bf121cfd-b0a5-4e3a-9b8b-9fc66df4ec5e",
+						"exec": [
+							"",
+							"pm.globals.set(\"cityname\", \"襄樊\");",
+							"pm.globals.set(\"version\", \"v1\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "816e0c43-c11c-4fb6-b8d1-a1210ac461ac",
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202,200]);",
+							"});",
+							"",
+							"",
+							"pm.globals.set(\"cityname\", \"上海\");",
+							"pm.globals.set(\"version\", \"v1\");",
+							"",
+							"city = pm.globals.get(\"cityname\");",
+							"version = pm.globals.get(\"version\");",
+							"console.log(\"city设置为:\" +city);",
+							"console.log(\"version设置为:\" +version);",
+							"",
+							"postman.setNextRequest('postman-echo.com/{{path}}');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://tianqiapi.com/api/?version={{version}}&city={{cityname}}",
+					"protocol": "https",
+					"host": [
+						"tianqiapi",
+						"com"
+					],
+					"path": [
+						"api",
+						""
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "{{version}}"
+						},
+						{
+							"key": "city",
+							"value": "{{cityname}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tianqi1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4477f907-5b20-41c7-b0b8-d62a630a7d26",
+						"exec": [
+							"pm.globals.set(\"cityname\", \"上海\");",
+							"pm.globals.set(\"version\", \"v1\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "35a60a40-7e2b-46e3-85cc-14dc7fbbab70",
+						"exec": [
+							"//pm.response.to.have",
+							"pm.test(\"response is ok\",function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.globals.get(\"variable_key\");//pm.expect()",
+							"//pm.test(\"envirionment to be production\",function(){",
+							"    //pm.expect(pm.environment.get(\"env\")).to.equal(\"production\");",
+							"//});",
+							"",
+							"//response assertions",
+							"//pm.test(\"response should be okay to process\",function(){",
+							"  //  pm.response.to.not.be.error;",
+							"    //pm.reponse.to.have.jsonBody(\"\");",
+							"    //pm.response.to,not.be.have.jsonBody(\"error\");",
+							"//});",
+							"",
+							"//pm.response.to.be*",
+							"pm.test(\"response must be valid and have a body\",function(){",
+							"    //assert that the status code is 200",
+							"    pm.response.to.be.ok;",
+							"    //assert that the response has a valid JSON body",
+							"    pm.response.to.be.withBody;",
+							"    // ",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"//设置一个环境变量",
+							"pm.environment.set(\"variable_key\", \"variable_value\");",
+							"//Postman.setEnvironmentVariable(variableName,variableValue);",
+							"//获取一个环境变量",
+							"pm.environment.get(\"variable_key\");",
+							"//Postman.getEnvironmentVariable(variableName);",
+							"//清除环境变量",
+							"pm.environment.unset(\"variable_key\");",
+							"",
+							"//设置一个全局环境变量",
+							"pm.globals.set(\"variable_key\", \"variable_value\");",
+							"//Postman.setGlobalVariable(variableName,variableValue);",
+							"///获取全局变量",
+							"pm.globals.get(\"variable_key\");",
+							"",
+							"//清除全局变量",
+							"pm.globals.unset(\"variable_key\");",
+							"",
+							"//得到一个变量",
+							"pm.variables.get(\"variable_key\");",
+							"",
+							"//检查响应主体是否包含字符串",
+							"//pm.test(\"Body matches string\", function () {",
+							"  //  pm.expect(pm.response.text()).to.include(\"string_you_want_to_search\");",
+							"//});",
+							"",
+							"//检查JSON值",
+							"//pm.test(\"Your test name\", function () {",
+							"  //  var jsonData = pm.response.json();",
+							"    //pm.expect(jsonData.value).to.eql(100);",
+							"//});",
+							"",
+							"//内容类型存在",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//",
+							"//pm.test(\"Status code name has string\", function () {",
+							"  //  pm.response.to.have.status(\"Created\");",
+							"//});",
+							"",
+							"//设置下一步要执行的请求",
+							"//Postman.setNextRequest(\"request_name\");",
+							"",
+							"//停止工作流程的执行",
+							"//Postman.setNextRequest(null);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://tianqiapi.com/api/?version={{version}}&city={{cityname}}",
+					"protocol": "https",
+					"host": [
+						"tianqiapi",
+						"com"
+					],
+					"path": [
+						"api",
+						""
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "{{version}}"
+						},
+						{
+							"key": "city",
+							"value": "{{cityname}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postman-echo.com/{{path}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9c8da8ee-7502-49c1-b36f-5b94727aa333",
+						"exec": [
+							"pm.environment.set('foo', 'bar2');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "foo",
+							"value": "{{foo}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "postman-echo.com/{{path}}",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"{{path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tianqi",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4e85e9a1-6c53-4aef-af43-b9a9f6a1d892",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://tianqiapi.com/api/?version={{version}}&city={{cityname}}",
+					"protocol": "https",
+					"host": [
+						"tianqiapi",
+						"com"
+					],
+					"path": [
+						"api",
+						""
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "{{version}}"
+						},
+						{
+							"key": "city",
+							"value": "{{cityname}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
